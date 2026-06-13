@@ -1,6 +1,6 @@
 package mvc.modelo;
 
-public abstract class  Persona {
+public abstract class  AAPersona {
     //Dclaracion de Variables
     protected int ID;
     protected String nombre;
@@ -27,7 +27,7 @@ public abstract class  Persona {
     }
     
     //Método Constructor
-    public Persona(int ID, String nombre, int telf) {
+    public AAPersona(int ID, String nombre, int telf) {
         this.ID = ID;
         this.nombre = nombre;
         this.telf = telf;

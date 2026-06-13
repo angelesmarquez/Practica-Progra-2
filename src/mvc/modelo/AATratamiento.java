@@ -1,6 +1,6 @@
 package mvc.modelo;
 
-public abstract class Tratamiento {
+public abstract class AATratamiento {
     //Variables
    protected int TDTratamiento;
    protected String nomTrat;
@@ -27,7 +27,7 @@ public abstract class Tratamiento {
     }
     
     //Metodo consrructor
-    public Tratamiento(int TDTratamiento, String nomTrat, float costoBase) {
+    public AATratamiento(int TDTratamiento, String nomTrat, float costoBase) {
         this.TDTratamiento = TDTratamiento;
         this.nomTrat = nomTrat;
         this.costoBase = costoBase;
@@ -36,5 +36,4 @@ public abstract class Tratamiento {
     //Metodos Abtractos 
     public abstract float calcularcosto();
     public abstract String obtenerDuracion();
-   
 }
