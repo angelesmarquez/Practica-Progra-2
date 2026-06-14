@@ -1,4 +1,6 @@
 package mvc.modelo;
+import java.util.ArrayList;
+
 public class Paciente {
     
     //Variables propias de la clase Paciente
@@ -6,15 +8,16 @@ public class Paciente {
     private String nombre;
     private String historial;
     private String estado;
+    private ArrayList<AATratamiento> listaTratamientos;
     //faltaria el medico asignado, todavia no lo pongo esperando a empezar codificar, en caso de poner actualizar constructor,
     //gys
-    
-    //C
-    public Paciente(int idP, String nombre, String historial, String estado) {
+
+    public Paciente(int idP, String nombre, String historial, String estado, ArrayList<AATratamiento> listaTratamientos) {
         this.idP = idP;
         this.nombre = nombre;
         this.historial = historial;
         this.estado = estado;
+        this.listaTratamientos = new ArrayList<>();
     }
     
     //G&S
@@ -43,4 +46,7 @@ public class Paciente {
         this.estado = estado;
     }
     
+    public void agregarTratamiento(AATratamiento tratamiento) {
+    this.listaTratamientos.add(tratamiento);
+}
 }

@@ -1,10 +1,10 @@
 package mvc.modelo;
-public class AAdministrativo extends AAPersona {
+public class Administrativo extends AAPersona {
     
     private String departamento;
     
     //C
-    public AAdministrativo(String departamento, int ID, String nombre, int telf) {
+    public Administrativo(String departamento, int ID, String nombre, int telf) {
         super(ID, nombre, telf);
         this.departamento = departamento;
     }

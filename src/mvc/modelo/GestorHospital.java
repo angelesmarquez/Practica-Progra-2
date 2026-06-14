@@ -7,13 +7,16 @@ public class GestorHospital {
     //Mapas
     private Map<Integer,AAPersona> vPersonal;
     private Map<Integer,Paciente> vPacientes;
-    //Falta el de tratamieento
+    private Map <Integer, AATratamiento> vTratamiento;
     
     //C
-    public GestorHospital(Map<Integer, AAPersona> vPersonal, Map<Integer, Paciente> vPacientes) {
+
+    public GestorHospital(Map<Integer, AAPersona> vPersonal, Map<Integer, Paciente> vPacientes, Map<Integer, AATratamiento> vTratamiento) {
         this.vPersonal = vPersonal;
         this.vPacientes = vPacientes;
+        this.vTratamiento = vTratamiento;
     }
+    
     
     //Funcion que recibe los datos ingresados por el usuario y los guarda en el maps
     public void registrarPersonal (AAPersona nuevoPersonal){
