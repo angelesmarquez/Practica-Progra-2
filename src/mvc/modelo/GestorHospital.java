@@ -1,20 +1,39 @@
 package mvc.modelo;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class GestorHospital {
     
     //Mapas
-    private Map<Integer,AAPersona> vPersonal;
+    private Map<String,AAPersona> vPersonal;
     private Map<Integer,Paciente> vPacientes;
     private Map <Integer, AATratamiento> vTratamiento;
     
     //C
-
-    public GestorHospital(Map<Integer, AAPersona> vPersonal, Map<Integer, Paciente> vPacientes, Map<Integer, AATratamiento> vTratamiento) {
+    public GestorHospital(Map<String, AAPersona> vPersonal, Map<Integer, Paciente> vPacientes, Map<Integer, AATratamiento> vTratamiento) {
         this.vPersonal = vPersonal;
         this.vPacientes = vPacientes;
         this.vTratamiento = vTratamiento;
+    }
+
+    public GestorHospital() {
+        this.vPersonal = new HashMap<>();
+        this.vPacientes = new HashMap<>();
+        this.vTratamiento = new HashMap<>();
+    }
+    
+    //G
+    public Map<String, AAPersona> getvPersonal() {
+        return vPersonal;
+    }
+
+    public Map<Integer, Paciente> getvPacientes() {
+        return vPacientes;
+    }
+
+    public Map<Integer, AATratamiento> getvTratamiento() {
+        return vTratamiento;
     }
     
     
@@ -24,6 +43,7 @@ public class GestorHospital {
         vPersonal.put(nuevoPersonal.getID(), nuevoPersonal);
         System.out.println("Se registró correctamente");
     }
+    
     public void registrarPaciente(Paciente nuevoPaciente){
         
         vPacientes.put(nuevoPaciente.getIdP(),nuevoPaciente);

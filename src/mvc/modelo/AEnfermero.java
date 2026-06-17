@@ -5,10 +5,12 @@ public class AEnfermero extends AAPersona{
     private String areaAsignada;
     
     //Constructore
-    public AEnfermero(String areaAsignada, int ID, String nombre, int telf) {
-        super(ID, nombre, telf);
+    public AEnfermero(String areaAsignada, String ID, String nombre, String telf, String usuario, String contraseña) {
+        super(ID, nombre, telf, usuario, contraseña);
         this.areaAsignada = areaAsignada;
     }
+   
+
     //G&S
     public String getAreaAsignada() {
         return areaAsignada;

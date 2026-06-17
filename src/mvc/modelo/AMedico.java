@@ -2,15 +2,15 @@ package mvc.modelo;
 
 public class AMedico extends AAPersona {
     private String especialidad;
-    private int licMedica;
+    private String licMedica;
     
     //Constructores 
-    public AMedico(String especialidad, int licMedica, int ID, String nombre, int telf) {
-        super(ID, nombre, telf);
+    public AMedico(String especialidad, String licMedica, String ID, String nombre, String telf, String usuario, String contraseña) {
+        super(ID, nombre, telf, usuario, contraseña);
         this.especialidad = especialidad;
         this.licMedica = licMedica;
     }
-    
+     
     //Getters y Setters
     public String getEspecialidad() {
         return especialidad;
@@ -20,11 +20,11 @@ public class AMedico extends AAPersona {
         this.especialidad = especialidad;
     }
 
-    public int getLicMedica() {
+    public String getLicMedica() {
         return licMedica;
     }
 
-    public void setLicMedica(int licMedica) {
+    public void setLicMedica(String licMedica) {
         this.licMedica = licMedica;
     }
     
