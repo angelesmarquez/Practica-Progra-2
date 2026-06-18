@@ -9,6 +9,7 @@ public class Paciente {
     private String historial;
     private String estado;
     private ArrayList<AATratamiento> listaTratamientos;
+    private AMedico MedicoAsignado;   
     //faltaria el medico asignado, todavia no lo pongo esperando a empezar codificar, en caso de poner actualizar constructor,
     //gys
 
@@ -45,6 +46,16 @@ public class Paciente {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+    public AMedico getMedicoAsignado() {
+    return MedicoAsignado;
+    }
+    public void setMedicoAsignado(AMedico MedicoAsignado) {
+        this.MedicoAsignado = MedicoAsignado;
+    }
+    public ArrayList<AATratamiento> getListaTratamientos() {
+        return listaTratamientos;
+    }
+    
     
     public void agregarTratamiento(AATratamiento tratamiento) {
     this.listaTratamientos.add(tratamiento);
