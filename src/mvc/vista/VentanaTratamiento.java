@@ -15,7 +15,7 @@ public class VentanaTratamiento extends javax.swing.JDialog {
     /**
      * Creates new form VentanaTratamiendo
      */
-    public VentanaTratamiento(java.awt.Frame parent, boolean modal) {
+    public VentanaTratamiento(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         construirVista();
@@ -206,7 +206,7 @@ private void actualizarCampos() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                VentanaTratamiento dialog = new VentanaTratamiento(new javax.swing.JFrame(), true);
+                VentanaTratamiento dialog = new VentanaTratamiento(new javax.swing.JDialog(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

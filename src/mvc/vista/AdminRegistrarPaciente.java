@@ -264,11 +264,13 @@ public class AdminRegistrarPaciente extends javax.swing.JDialog {
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
     private void cmbASolicitadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbASolicitadaActionPerformed
-        
+           if (controlador!=null){
+               controlador.AreaMedico();
+           }
     }//GEN-LAST:event_cmbASolicitadaActionPerformed
 
     private void cmbMedicoAsigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMedicoAsigActionPerformed
-        
+            
     }//GEN-LAST:event_cmbMedicoAsigActionPerformed
 
     /**
@@ -309,8 +311,12 @@ public class AdminRegistrarPaciente extends javax.swing.JDialog {
     }
     
     private ControladorRegistrarPaciente controlador;
+    
     public void conectControlador (ControladorRegistrarPaciente controlador){
         this.controlador= controlador;
+        if (this.controlador != null) {
+            this.controlador.AreaMedico();
+        }
     }
     
     //GyS
@@ -332,6 +338,10 @@ public class AdminRegistrarPaciente extends javax.swing.JDialog {
     public String getCmbMedicoAsig() {
         return cmbMedicoAsig.getSelectedItem().toString();
     }    
+    //Metodo que se le entrega al combobx para poder poner y quitar items del combobox, el otro solo manda el texto
+    public javax.swing.JComboBox<String> cmbMedico(){
+        return cmbMedicoAsig;
+    }
    
     public void limpiarCampos(){
         //Limpiamos todos los campos de texto primero

@@ -1,6 +1,8 @@
 package mvc.controlador;
 
 import javax.swing.JOptionPane;
+import mvc.modelo.AAPersona;
+import mvc.modelo.AMedico;
 import mvc.modelo.GestorHospital;
 import mvc.modelo.Paciente;
 import mvc.vista.AdminRegistrarPaciente;
@@ -33,10 +35,24 @@ public class ControladorRegistrarPaciente {
         String nombre = vista.getCajaNombre();
         String ID = vista.getCajaID();
         String tlf = vista.getCajaTlf();
-        String medicoAsig = vista.getCmbMedicoAsig();
+        String nombreMed = vista.getCmbMedicoAsig();
+        
+        java.util.ArrayList<AAPersona> listaMedicos = new java.util.ArrayList<>(gestor.getvPersonal().values());
+        AMedico medicoObjeto = null;
+        for (int i = 0; i < listaMedicos.size(); i++) {
+            AAPersona encontrado = listaMedicos.get(i);
+            
+            if (encontrado instanceof AMedico) {
+                AMedico medico = (AMedico) encontrado;
+                if (medico.getNombre().equalsIgnoreCase(nombreMed)) {
+                    medicoObjeto = medico; 
+                    break;
+                }
+            }
+        }
        
         Paciente nuevoPaciente = null;
-        nuevoPaciente = new Paciente(ID, nombre, tlf, medicoAsig);
+        nuevoPaciente = new Paciente(ID, nombre, tlf, medicoObjeto);
         
         if(nuevoPaciente != null){
                 gestor.registrarPaciente(nuevoPaciente);
@@ -67,4 +83,28 @@ public class ControladorRegistrarPaciente {
     
     
 }
+     
+    public void AreaMedico(){
+        int i;
+        String seleccion = vista.getCmbASolicitada();
+        vista.cmbMedico().removeAllItems();
+       
+        //Array del tamaño del maps para el ciclo for
+        java.util.ArrayList<AAPersona> listaMedicos= new java.util.ArrayList<>(gestor.getvPersonal().values());
+        
+        for(i=0;i<listaMedicos.size();i++){
+            
+            AAPersona encontrado = listaMedicos.get(i);
+            
+            if(encontrado instanceof AMedico){
+                AMedico medico = (AMedico) encontrado;
+                if(medico.getEspecialidad().equalsIgnoreCase(seleccion)){
+                    vista.cmbMedico().addItem(medico.getNombre());
+                }
+            }
+        }
+        if(vista.cmbMedico().getItemCount() == 0){
+            vista.cmbMedico().addItem("No hay médicos disponibles");
+        }
+    }
 }

@@ -23,13 +23,13 @@ public class ControladorClinico {
     }
     
     public void abrirPacientes() {
-        VentanaListaPacients ventana = new VentanaListaPacients((java.awt.Frame) vista.getOwner(), true);
+        VentanaListaPacients ventana = new VentanaListaPacients((java.awt.Dialog) vista.getOwner(), true);
         cargarPacientes(ventana);
         ventana.setVisible(true);
     }
     
     public void abrirTratamiento() {
-    VentanaTratamiento ventana = new VentanaTratamiento((java.awt.Frame) vista.getOwner(), true);
+    VentanaTratamiento ventana = new VentanaTratamiento((java.awt.Dialog) vista.getOwner(), true);
     cargarComboPacientes(ventana);
     ventana.getBotonAsignar().addActionListener(e -> asignarTratamientoNuevo(ventana));
     ventana.setVisible(true);

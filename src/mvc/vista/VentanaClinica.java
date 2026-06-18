@@ -1,24 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
+
 package mvc.vista;
 
-/**
- *
- * @author ACER
- */
+import mvc.modelo.GestorHospital;
+
 public class VentanaClinica extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaClinica.class.getName());
-
+    private GestorHospital gestor;
     /**
      * Creates new form VentanaClinica
      */
-    public VentanaClinica(java.awt.Frame parent, boolean modal) {
+    public VentanaClinica(java.awt.Dialog parent, boolean modal, GestorHospital gestorE) {
         super(parent, modal);
         initComponents();
         construirVista();
+        
+        this.gestor=gestorE;
+        mvc.controlador.ControladorClinico controlador = new mvc.controlador.ControladorClinico(this, this.gestor, "medico001");
+        conectControlador(controlador);
     }
 
     /**
@@ -140,11 +139,10 @@ public class VentanaClinica extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                VentanaClinica dialog = new VentanaClinica(new javax.swing.JFrame(), true);
-                mvc.modelo.GestorHospital gestor = new mvc.modelo.GestorHospital();
-                mvc.controlador.ControladorClinico controlador = new mvc.controlador.ControladorClinico(dialog, gestor, "medico001");
+                GestorHospital gestorPrueba = new GestorHospital();
+                VentanaClinica dialog = new VentanaClinica(new javax.swing.JDialog(), true, gestorPrueba);
+                
                 dialog.setNombreMedico("García");
-                dialog.conectControlador(controlador);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

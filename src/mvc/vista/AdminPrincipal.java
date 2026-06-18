@@ -7,14 +7,14 @@ import mvc.modelo.GestorHospital;
 public class AdminPrincipal extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminPrincipal.class.getName());
-    private GestorHospital gestor = new GestorHospital();
+    //private GestorHospital gestor = new GestorHospital();
     
-    /**
-     * Creates new form Registrar
-     */
-    public AdminPrincipal(java.awt.Frame parent, boolean modal) {
+    private GestorHospital gestor;
+    
+    public AdminPrincipal(java.awt.Dialog parent, boolean modal, GestorHospital gestorE) {
         super(parent, modal);
         initComponents();
+        this.gestor=gestorE;
     }
 
     /**
@@ -194,7 +194,8 @@ public class AdminPrincipal extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                AdminPrincipal dialog = new AdminPrincipal(new javax.swing.JFrame(), true);
+                GestorHospital gestorPrueba = new GestorHospital();
+                AdminPrincipal dialog = new AdminPrincipal(new javax.swing.JDialog(), true, gestorPrueba);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

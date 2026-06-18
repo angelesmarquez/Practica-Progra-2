@@ -15,7 +15,7 @@ public class VentanaListaPacients extends javax.swing.JDialog {
     /**
      * Creates new form VentanaListaPacients
      */
-    public VentanaListaPacients(java.awt.Frame parent, boolean modal) {
+    public VentanaListaPacients(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         construirVista();
@@ -109,7 +109,7 @@ public class VentanaListaPacients extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                VentanaListaPacients dialog = new VentanaListaPacients(new javax.swing.JFrame(), true);
+                VentanaListaPacients dialog = new VentanaListaPacients(new javax.swing.JDialog(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
