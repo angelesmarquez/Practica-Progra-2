@@ -18,7 +18,57 @@ public class VentanaListaPacients extends javax.swing.JDialog {
     public VentanaListaPacients(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        construirVista();
     }
+    
+            private void construirVista() {
+            setTitle("Mis Pacientes");
+            setSize(600, 530);
+            setLocationRelativeTo(null);
+            setLayout(new java.awt.BorderLayout());
+
+            javax.swing.JPanel panelTitulo = new javax.swing.JPanel(new java.awt.BorderLayout());
+            panelTitulo.setBackground(new java.awt.Color(255, 255, 255));
+
+            javax.swing.JPanel panelTexto = new javax.swing.JPanel();
+            panelTexto.setBackground(new java.awt.Color(255, 255, 255));
+            panelTexto.setLayout(new javax.swing.BoxLayout(panelTexto, javax.swing.BoxLayout.Y_AXIS));
+            panelTexto.setBorder(javax.swing.BorderFactory.createEmptyBorder(14, 91, 0, 0));
+
+            javax.swing.JLabel lblTitulo = new javax.swing.JLabel("Mis Pacientes");
+            lblTitulo.setFont(new java.awt.Font("Georgia", 2, 24));
+
+            javax.swing.JPanel barraAzul = new javax.swing.JPanel();
+            barraAzul.setBackground(new java.awt.Color(0, 0, 51));
+            barraAzul.setPreferredSize(new java.awt.Dimension(600, 11));
+
+            panelTexto.add(lblTitulo);
+            panelTitulo.add(panelTexto, java.awt.BorderLayout.CENTER);
+            panelTitulo.add(barraAzul, java.awt.BorderLayout.SOUTH);
+
+            String[] columnas = {"ID", "Nombre", "Estado", "Médico"};
+            modeloTabla = new javax.swing.table.DefaultTableModel(columnas, 0);
+            tablaPacientes = new javax.swing.JTable(modeloTabla);
+            tablaPacientes.setFont(new java.awt.Font("Calisto MT", 0, 14));
+            tablaPacientes.setRowHeight(30);
+            tablaPacientes.getTableHeader().setBackground(new java.awt.Color(0, 0, 102));
+            tablaPacientes.getTableHeader().setForeground(new java.awt.Color(0, 0, 51));
+            tablaPacientes.getTableHeader().setFont(new java.awt.Font("Calisto MT", 1, 14));
+
+            javax.swing.JScrollPane scrollTabla = new javax.swing.JScrollPane(tablaPacientes);
+            scrollTabla.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 20, 10, 20));
+
+            javax.swing.JPanel panelCentral = new javax.swing.JPanel(new java.awt.BorderLayout());
+            panelCentral.setBackground(new java.awt.Color(102, 153, 255));
+            panelCentral.add(scrollTabla, java.awt.BorderLayout.CENTER);
+
+            add(panelTitulo, java.awt.BorderLayout.NORTH);
+            add(panelCentral, java.awt.BorderLayout.CENTER);
+        }
+
+        public javax.swing.table.DefaultTableModel getModeloTabla() { return modeloTabla; }
+        public javax.swing.JTable getTablaPacientes() { return tablaPacientes; }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,7 +120,11 @@ public class VentanaListaPacients extends javax.swing.JDialog {
             }
         });
     }
-
+    
+    
+                
+    private javax.swing.JTable tablaPacientes;
+    private javax.swing.table.DefaultTableModel modeloTabla;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

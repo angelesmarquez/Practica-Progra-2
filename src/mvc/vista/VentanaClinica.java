@@ -95,19 +95,15 @@ public class VentanaClinica extends javax.swing.JDialog {
     botonTratamiento.setForeground(new java.awt.Color(255, 204, 255));
     botonTratamiento.setPreferredSize(new java.awt.Dimension(266, 80));
 
-    botonFactura = new javax.swing.JButton("Generar Factura");
-    botonFactura.setBackground(new java.awt.Color(0, 0, 102));
-    botonFactura.setFont(new java.awt.Font("Calisto MT", 1, 22));
-    botonFactura.setForeground(new java.awt.Color(255, 204, 255));
-    botonFactura.setPreferredSize(new java.awt.Dimension(266, 80));
+   
 
     gbc.gridy = 0; panelBotones.add(botonPacientes, gbc);
     gbc.gridy = 1; panelBotones.add(botonTratamiento, gbc);
-    gbc.gridy = 2; panelBotones.add(botonFactura, gbc);
 
     add(panelTitulo, java.awt.BorderLayout.NORTH);
     add(panelBotones, java.awt.BorderLayout.CENTER);
-    pack();
+    setSize(600, 500);
+    setLocationRelativeTo(null);
 }
 
     public void setNombreMedico(String nombre) {
@@ -117,7 +113,7 @@ public class VentanaClinica extends javax.swing.JDialog {
     public void conectControlador(mvc.controlador.ControladorClinico controlador) {
         botonPacientes.addActionListener(e -> controlador.abrirPacientes());
         botonTratamiento.addActionListener(e -> controlador.abrirTratamiento());
-        botonFactura.addActionListener(e -> controlador.abrirFactura());
+        
     }
     /**
      * @param args the command line arguments
@@ -145,6 +141,10 @@ public class VentanaClinica extends javax.swing.JDialog {
             @Override
             public void run() {
                 VentanaClinica dialog = new VentanaClinica(new javax.swing.JFrame(), true);
+                mvc.modelo.GestorHospital gestor = new mvc.modelo.GestorHospital();
+                mvc.controlador.ControladorClinico controlador = new mvc.controlador.ControladorClinico(dialog, gestor, "medico001");
+                dialog.setNombreMedico("García");
+                dialog.conectControlador(controlador);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -158,7 +158,6 @@ public class VentanaClinica extends javax.swing.JDialog {
 
     private javax.swing.JButton botonPacientes;
     private javax.swing.JButton botonTratamiento;
-    private javax.swing.JButton botonFactura;
     private javax.swing.JLabel jLabel2;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

@@ -1,7 +1,7 @@
 package mvc.modelo;
 import java.util.ArrayList;
 
-public class Paciente {
+public class Paciente implements InterfaceAtendible {
     
     //Variables propias de la clase Paciente
     private String idP;
@@ -86,7 +86,23 @@ public class Paciente {
         return MedicoAsignado;
     }
 
-    public void setMedicoAsignado(AMedico MedicoAsignado) {
+     public void setMedicoAsignado(AMedico MedicoAsignado) {
         this.MedicoAsignado = MedicoAsignado;
-    }
+     }
+    
+     
+        
+     public void asignarMedico(AMedico medico) {
+     this.medicoAsig = medico.getNombre();
+     
+     }
+
+     public void iniciarTratamiento(AATratamiento tratamiento) {
+        listaTratamientos.add(tratamiento);
+     }
+
+     public void finalizarTratamiento(AATratamiento tratamiento) {
+        listaTratamientos.remove(tratamiento);
+     }
+    
 }
