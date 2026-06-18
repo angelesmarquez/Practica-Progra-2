@@ -1,6 +1,7 @@
 package mvc.vista;
 
 import mvc.controlador.ControladorRegistrar;
+import mvc.controlador.ControladorRegistrarPaciente;
 import mvc.modelo.GestorHospital;
 
 public class AdminPrincipal extends javax.swing.JDialog {
@@ -100,7 +101,7 @@ public class AdminPrincipal extends javax.swing.JDialog {
         jButton3.setBackground(new java.awt.Color(0, 0, 102));
         jButton3.setFont(new java.awt.Font("Calisto MT", 1, 22)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 204, 255));
-        jButton3.setText("Asignar Médico");
+        jButton3.setText("Generar Factura");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -150,7 +151,11 @@ public class AdminPrincipal extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        AdminRegistrarPaciente vistaRegistroPac = new AdminRegistrarPaciente(this, true);
+        ControladorRegistrarPaciente controladorRegistroPac = new ControladorRegistrarPaciente(vistaRegistroPac,this.gestor);
+        vistaRegistroPac.conectControlador(controladorRegistroPac);
+        vistaRegistroPac.setVisible(true);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void botonRegistratPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistratPersonalActionPerformed

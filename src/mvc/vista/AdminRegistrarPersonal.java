@@ -313,7 +313,7 @@ public class AdminRegistrarPersonal extends javax.swing.JDialog {
     }//GEN-LAST:event_cmbAreaEnfActionPerformed
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
-        controlador.Regitrar();
+        controlador.RegitrarPersonal();
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed

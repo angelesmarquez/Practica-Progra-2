@@ -8,34 +8,34 @@ public class GestorHospital {
     
     //Mapas
     private Map<String,AAPersona> vPersonal;
-    private Map<Integer,Paciente> vPacientes;
+    private Map<String,Paciente> vPacientes;
     private Map <Integer, AATratamiento> vTratamiento;
     
     //C
-    public GestorHospital(Map<String, AAPersona> vPersonal, Map<Integer, Paciente> vPacientes, Map<Integer, AATratamiento> vTratamiento) {
+    public GestorHospital(Map<String, AAPersona> vPersonal, Map<String, Paciente> vPacientes, Map<Integer, AATratamiento> vTratamiento) {    
         this.vPersonal = vPersonal;
         this.vPacientes = vPacientes;
         this.vTratamiento = vTratamiento;
     }
-
     public GestorHospital() {
         this.vPersonal = new HashMap<>();
         this.vPacientes = new HashMap<>();
         this.vTratamiento = new HashMap<>();
     }
-    
+
     //G
     public Map<String, AAPersona> getvPersonal() {
         return vPersonal;
     }
 
-    public Map<Integer, Paciente> getvPacientes() {
+    public Map<String, Paciente> getvPacientes() {
         return vPacientes;
     }
 
     public Map<Integer, AATratamiento> getvTratamiento() {
         return vTratamiento;
     }
+    
     
     
     //Funcion que recibe los datos ingresados por el usuario y los guarda en el maps
@@ -52,7 +52,7 @@ public class GestorHospital {
     }
     
     //Funcion que busca el paciente solicitado por el usuario y si no lo encuentra revienta el error generado
-    public Paciente buscarPaciente (int ID) throws PacienteNoEncontradoException {
+    public Paciente buscarPaciente (String ID) throws PacienteNoEncontradoException {
         
         Paciente encontrado = vPacientes.get(ID);
         if (encontrado == null){
@@ -62,7 +62,7 @@ public class GestorHospital {
     }
     
     //LE DICE COMO TAL AL MAPA BUSCAME ESTE ID Y DEVUELVEMELO, SE NECESITA PARA LUEGO LISTAR A LOS PACIENTES DEL MEDICO
-    public void asignarMedico(int idPaciente, String idMedico) throws 
+    public void asignarMedico(String idPaciente, String idMedico) throws 
     PacienteNoEncontradoException, SinMedicoAsignadoException {
     
     Paciente paciente = vPacientes.get(idPaciente);
@@ -95,7 +95,7 @@ public class GestorHospital {
     }
     
     //AGREGA EL TRATAMIENTO AL ARRAYLIST DEL PACIENTE 
-    public void asignarTratamiento(int idPaciente, int idTratamiento) 
+    public void asignarTratamiento(String idPaciente, int idTratamiento) 
         throws PacienteNoEncontradoException, SinMedicoAsignadoException {
     
      Paciente paciente = vPacientes.get(idPaciente);
@@ -117,7 +117,7 @@ public class GestorHospital {
     }
     
     //SE PUEDE DEJAR EL TEXTO GENERADO EN EL METODO EN LA INTERFAZ CON TEXT AREA 
-    public String generarFactura(int idPaciente) throws PacienteNoEncontradoException {
+    public String generarFactura(String idPaciente) throws PacienteNoEncontradoException {
     
      Paciente paciente = vPacientes.get(idPaciente);
       if (paciente == null) {

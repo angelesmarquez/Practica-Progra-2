@@ -18,8 +18,7 @@ public class ControladorRegistrar {
         this.gestor = gestor;
     }
     
-    
-    public void Regitrar(){
+    public void RegitrarPersonal(){
         String area = vista.getCmbArea();
         
         if(area.isEmpty()){

@@ -4,60 +4,89 @@ import java.util.ArrayList;
 public class Paciente {
     
     //Variables propias de la clase Paciente
-    private int idP;
+    private String idP;
     private String nombre;
     private String historial;
     private String estado;
+    private String tlf;
+    private String medicoAsig;
     private ArrayList<AATratamiento> listaTratamientos;
     private AMedico MedicoAsignado;   
     //faltaria el medico asignado, todavia no lo pongo esperando a empezar codificar, en caso de poner actualizar constructor,
     //gys
 
-    public Paciente(int idP, String nombre, String historial, String estado, ArrayList<AATratamiento> listaTratamientos) {
+    public Paciente(String idP, String nombre, String historial, String estado, String tlf, ArrayList<AATratamiento> listaTratamientos, AMedico MedicoAsignado) {
         this.idP = idP;
         this.nombre = nombre;
         this.historial = historial;
         this.estado = estado;
-        this.listaTratamientos = new ArrayList<>();
-    }
-    
-    //G&S
-    public int getIdP() {
-        return idP;
-    }
-    public void setIdP(int idP) {
-        this.idP = idP;
-    }
-    public String getNombre() {
-        return nombre;
-    }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    public String getHistorial() {
-        return historial;
-    }
-    public void setHistorial(String historial) {
-        this.historial = historial;
-    }
-    public String getEstado() {
-        return estado;
-    }
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-    public AMedico getMedicoAsignado() {
-    return MedicoAsignado;
-    }
-    public void setMedicoAsignado(AMedico MedicoAsignado) {
+        this.tlf = tlf;
+        this.listaTratamientos = listaTratamientos;
         this.MedicoAsignado = MedicoAsignado;
     }
-    public ArrayList<AATratamiento> getListaTratamientos() {
-        return listaTratamientos;
+    
+    //Segundo Constructor quye no tiene el array de tratamiento y un estado neutral en estado, par la paret administrativa
+    public Paciente(String idP, String nombre, String tlf, String MedicoAsignado) {
+        this.idP = idP;
+        this.nombre = nombre;
+        this.tlf = tlf;
+        this.medicoAsig = MedicoAsignado;
+        
+        this.listaTratamientos = new ArrayList<>(); 
+        this.estado = "Ingresado";
     }
     
-    
+
+    //G&S
     public void agregarTratamiento(AATratamiento tratamiento) {
     this.listaTratamientos.add(tratamiento);
 }
+
+    public String getIdP() {
+        return idP;
+    }
+
+    public void setIdP(String idP) {
+        this.idP = idP;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getHistorial() {
+        return historial;
+    }
+
+    public void setHistorial(String historial) {
+        this.historial = historial;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public ArrayList<AATratamiento> getListaTratamientos() {
+        return listaTratamientos;
+    }
+
+    public void setListaTratamientos(ArrayList<AATratamiento> listaTratamientos) {
+        this.listaTratamientos = listaTratamientos;
+    }
+
+    public AMedico getMedicoAsignado() {
+        return MedicoAsignado;
+    }
+
+    public void setMedicoAsignado(AMedico MedicoAsignado) {
+        this.MedicoAsignado = MedicoAsignado;
+    }
 }
