@@ -12,22 +12,13 @@ public class Login extends javax.swing.JDialog {
     public Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+        // Administrador predeterminado del sistema
+        mvc.modelo.Administrativo adminDefault = new mvc.modelo.Administrativo(
+            "Administración", "A000", "Administrador", "0000000000", "admin", "admin123"
+        );
+        gestor.registrarPersonal(adminDefault);
     }
-    
-    //Si es Administrativo
-    //AdminPrincipal vistaAdmin = new AdminPrincipal(this,true,this.gestor)
-    //vistaAdmin.setVisible(true);
-    
-    //Si es Medico
-    //VistaClinica vistaClinica = new VistaClinica (this,false,this,gestor)
-    //vistaClinica.setVsible(true)
-    
-    //Par enfermero es lo mismo
-    //Nombre de la clase donde esta la panatlla princpial del enferemero, luego el nombre de la variable, new y (this,false.this.gestor)
-    //y luego la haces visible
-    //Porfa acuerdate de ver como use el constructor en la panatlla de VistaClinica, para que lo hagas igual en la del enfermero. Para tratar
-    //de seguir una secuencia. Suerte amigui :))
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -200,11 +191,69 @@ public class Login extends javax.swing.JDialog {
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        
+
+     String usuario = txtUsuario.getText().trim();
+     String contrasena = new String(txtPassword.getPassword()).trim();
+     String cargo = cmbCargo.getSelectedItem().toString();
+
+     mvc.modelo.AAPersona personaEncontrada = null;
+     for (mvc.modelo.AAPersona p : gestor.getvPersonal().values()) {
+         if (p.getUsuario().equals(usuario) && p.getContraseña().equals(contrasena)) {
+            personaEncontrada = p;
+            break;
+           }
+       }
+
+     if (personaEncontrada == null) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.");
+        return;
+       }
+     if (personaEncontrada == null) {
+    javax.swing.JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.");
+    return;
+}
+
+     // Verificar que el cargo coincida con el tipo de persona
+     boolean cargoValido = false;
+     switch (cargo) {
+        case "Administrativo":
+            cargoValido = personaEncontrada instanceof mvc.modelo.Administrativo;
+            break;
+        case "Medico":
+            cargoValido = personaEncontrada instanceof mvc.modelo.AMedico;
+            break;
+        case "Enfermero":
+            cargoValido = personaEncontrada instanceof mvc.modelo.AEnfermero;
+            break;
+    }
+
+    if (!cargoValido) {
+        javax.swing.JOptionPane.showMessageDialog(this, "El cargo seleccionado no corresponde a este usuario.");
+        return;
+    }
+
+     String idPersona = personaEncontrada.getID();
+
+     switch (cargo) {
+        case "Administrativo":
+            AdminPrincipal vistaAdmin = new AdminPrincipal(this, true, gestor);
+            vistaAdmin.setVisible(true);
+            break;
+        case "Medico":
+            VentanaClinica vistaClinica = new VentanaClinica(this, true, gestor, idPersona);
+            vistaClinica.setNombreMedico(personaEncontrada.getNombre());
+            vistaClinica.setVisible(true);
+            break;
+        case "Enfermero":
+            javax.swing.JOptionPane.showMessageDialog(this, "Módulo de enfermero próximamente.");
+            break;
+    }
+
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
+       
+     System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     /**

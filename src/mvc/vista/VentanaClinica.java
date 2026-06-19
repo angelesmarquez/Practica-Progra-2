@@ -10,15 +10,15 @@ public class VentanaClinica extends javax.swing.JDialog {
     /**
      * Creates new form VentanaClinica
      */
-    public VentanaClinica(java.awt.Dialog parent, boolean modal, GestorHospital gestorE) {
-        super(parent, modal);
-        initComponents();
-        construirVista();
-        
-        this.gestor=gestorE;
-        mvc.controlador.ControladorClinico controlador = new mvc.controlador.ControladorClinico(this, this.gestor, "medico001");
-        conectControlador(controlador);
-    }
+    public VentanaClinica(java.awt.Dialog parent, boolean modal, GestorHospital gestorE, String idMedico) {
+    super(parent, modal);
+    initComponents();
+    construirVista();
+    setLocationRelativeTo(null);
+    this.gestor = gestorE;
+    mvc.controlador.ControladorClinico controlador = new mvc.controlador.ControladorClinico(this, this.gestor, idMedico);
+    conectControlador(controlador);
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -140,7 +140,7 @@ public class VentanaClinica extends javax.swing.JDialog {
             @Override
             public void run() {
                 GestorHospital gestorPrueba = new GestorHospital();
-                VentanaClinica dialog = new VentanaClinica(new javax.swing.JDialog(), true, gestorPrueba);
+                VentanaClinica dialog = new VentanaClinica(new javax.swing.JDialog(), true, gestorPrueba, "test");
                 
                 dialog.setNombreMedico("García");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {

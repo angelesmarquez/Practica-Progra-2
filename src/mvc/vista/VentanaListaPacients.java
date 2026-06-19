@@ -19,6 +19,7 @@ public class VentanaListaPacients extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         construirVista();
+        setLocationRelativeTo(null);
     }
     
             private void construirVista() {

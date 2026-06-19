@@ -10,6 +10,8 @@ public class AdminRegistrarPersonal extends javax.swing.JDialog {
     public AdminRegistrarPersonal(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+        cmbEspecialidad1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Medicina General", "Odontología", "Fisioterapia" }));
         
         cmbArea.setSelectedIndex(-1);
         desactivar();
@@ -317,7 +319,8 @@ public class AdminRegistrarPersonal extends javax.swing.JDialog {
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
-        // TODO add your handling code here:
+
+    dispose();
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     private void cmbDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDepartamentoActionPerformed

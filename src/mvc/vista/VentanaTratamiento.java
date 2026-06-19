@@ -19,6 +19,7 @@ public class VentanaTratamiento extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         construirVista();
+        setLocationRelativeTo(null);
     }
     
         

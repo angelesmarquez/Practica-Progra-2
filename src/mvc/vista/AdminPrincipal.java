@@ -14,6 +14,7 @@ public class AdminPrincipal extends javax.swing.JDialog {
     public AdminPrincipal(java.awt.Dialog parent, boolean modal, GestorHospital gestorE) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         this.gestor=gestorE;
     }
 
