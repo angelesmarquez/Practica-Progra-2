@@ -16,7 +16,7 @@ public class GestorHospital implements Serializable{
     private Map<String,AAPersona> vPersonal;
     private Map<String,Paciente> vPacientes;
     private Map <Integer, AATratamiento> vTratamiento;
-    
+    private Map<Integer, Integer> progresoDosis = new HashMap<>();
     //C
     public GestorHospital(Map<String, AAPersona> vPersonal, Map<String, Paciente> vPacientes, Map<Integer, AATratamiento> vTratamiento) {    
         this.vPersonal = vPersonal;
@@ -200,6 +200,10 @@ public class GestorHospital implements Serializable{
     
      return factura;
     }*/
+    
+    public Map<Integer, Integer> getProgresoDosis() {
+    return progresoDosis;
+    }
     
     
 }

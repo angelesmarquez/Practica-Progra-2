@@ -46,8 +46,18 @@ public class VentanaListaPacients extends javax.swing.JDialog {
             panelTexto.add(lblTitulo);
             panelTitulo.add(panelTexto, java.awt.BorderLayout.CENTER);
             panelTitulo.add(barraAzul, java.awt.BorderLayout.SOUTH);
+            
+            botonAlta = new javax.swing.JButton("Dar de Alta");
+            botonAlta.setBackground(new java.awt.Color(102, 0, 0));
+            botonAlta.setFont(new java.awt.Font("Calisto MT", 1, 18));
+            botonAlta.setForeground(new java.awt.Color(255, 255, 255));
+            botonAlta.setPreferredSize(new java.awt.Dimension(200, 45));
 
-            String[] columnas = {"ID", "Nombre", "Estado", "Médico"};
+            javax.swing.JPanel panelBoton = new javax.swing.JPanel();
+            panelBoton.setBackground(new java.awt.Color(102, 153, 255));
+            panelBoton.add(botonAlta);
+
+            String[] columnas = {"ID", "Nombre", "Estado", "Tratamiento"};
             modeloTabla = new javax.swing.table.DefaultTableModel(columnas, 0);
             tablaPacientes = new javax.swing.JTable(modeloTabla);
             tablaPacientes.setFont(new java.awt.Font("Calisto MT", 0, 14));
@@ -65,10 +75,12 @@ public class VentanaListaPacients extends javax.swing.JDialog {
 
             add(panelTitulo, java.awt.BorderLayout.NORTH);
             add(panelCentral, java.awt.BorderLayout.CENTER);
+            add(panelBoton, java.awt.BorderLayout.SOUTH);
         }
 
         public javax.swing.table.DefaultTableModel getModeloTabla() { return modeloTabla; }
         public javax.swing.JTable getTablaPacientes() { return tablaPacientes; }
+        public javax.swing.JButton getBotonAlta() { return botonAlta; }
     
 
     /**
@@ -126,6 +138,7 @@ public class VentanaListaPacients extends javax.swing.JDialog {
                 
     private javax.swing.JTable tablaPacientes;
     private javax.swing.table.DefaultTableModel modeloTabla;
+    private javax.swing.JButton botonAlta;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

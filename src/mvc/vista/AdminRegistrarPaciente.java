@@ -12,6 +12,8 @@ public class AdminRegistrarPaciente extends javax.swing.JDialog {
     public AdminRegistrarPaciente(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        cajaNombre.addActionListener(e -> cajaTlf.requestFocus());
+        cajaTlf.addActionListener(e -> cajaID.requestFocus());
         setLocationRelativeTo(null);
     }
 

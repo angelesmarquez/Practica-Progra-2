@@ -1,6 +1,6 @@
 
 package mvc.vista;
-
+import mvc.vista.VentanaEnfermero;
 import mvc.modelo.GestorHospital;
 
 public class Login extends javax.swing.JDialog {
@@ -13,7 +13,7 @@ public class Login extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        
+        txtUsuario.addActionListener(e -> txtPassword.requestFocus());
         boolean existente = false;
         for (mvc.modelo.AAPersona p : gestor.getvPersonal().values()) {
             if (p.getUsuario().equals("admin")) {
@@ -198,7 +198,7 @@ public class Login extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-
+       btnAceptarActionPerformed(evt);
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
@@ -209,20 +209,19 @@ public class Login extends javax.swing.JDialog {
 
      mvc.modelo.AAPersona personaEncontrada = null;
      for (mvc.modelo.AAPersona p : gestor.getvPersonal().values()) {
-         if (p.getUsuario().equals(usuario) && p.getContraseña().equals(contrasena)) {
-            personaEncontrada = p;
-            break;
-           }
-       }
+     if (p.getUsuario().equals(usuario) && p.getContraseña().equals(contrasena)) {
+        personaEncontrada = p;
+        break;
+    }
+}
 
-     if (personaEncontrada == null) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.");
-        return;
-       }
+if (personaEncontrada == null) {
+    javax.swing.JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.");
+    return;
+}
 
-     // Verificar que el cargo coincida con el tipo de persona
-     boolean cargoValido = false;
-     switch (cargo) {
+    boolean cargoValido = false;
+    switch (cargo) {
         case "Administrativo":
             cargoValido = personaEncontrada instanceof mvc.modelo.Administrativo;
             break;
@@ -239,7 +238,33 @@ public class Login extends javax.swing.JDialog {
         return;
     }
 
-     String idPersona = personaEncontrada.getID();
+    String idPersona = personaEncontrada.getID();
+    switch (cargo) {
+    case "Administrativo":
+        AdminPrincipal vistaAdmin = new AdminPrincipal(this, true, gestor);
+        vistaAdmin.setVisible(true);
+        txtUsuario.setText("");
+        txtPassword.setText("");
+        cmbCargo.setSelectedIndex(0);
+        return;
+    case "Medico":
+        VentanaClinica vistaClinica = new VentanaClinica(this, true, gestor, idPersona);
+        vistaClinica.setNombreMedico(personaEncontrada.getNombre());
+        vistaClinica.setVisible(true);
+        txtUsuario.setText("");
+        txtPassword.setText("");
+        cmbCargo.setSelectedIndex(0);
+        return;
+    case "Enfermero":
+        VentanaEnfermero vistaEnf = new VentanaEnfermero(this, true, gestor, idPersona);
+        vistaEnf.setNombreEnfermero(personaEncontrada.getNombre());
+        vistaEnf.setVisible(true);
+        txtUsuario.setText("");
+        txtPassword.setText("");
+        cmbCargo.setSelectedIndex(0);
+        return;
+}
+
 
      switch (cargo) {
         case "Administrativo":
@@ -252,7 +277,9 @@ public class Login extends javax.swing.JDialog {
             vistaClinica.setVisible(true);
             break;
         case "Enfermero":
-            javax.swing.JOptionPane.showMessageDialog(this, "Módulo de enfermero próximamente.");
+            VentanaEnfermero vistaEnf = new VentanaEnfermero(this, true, gestor, idPersona);
+            vistaEnf.setNombreEnfermero(personaEncontrada.getNombre());
+            vistaEnf.setVisible(true);
             break;
     }
 

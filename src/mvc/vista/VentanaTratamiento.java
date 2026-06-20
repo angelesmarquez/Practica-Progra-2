@@ -120,6 +120,10 @@ public class VentanaTratamiento extends javax.swing.JDialog {
     // Cambio dinámico según tipo
     comboTipo.addActionListener(e -> actualizarCampos());
     actualizarCampos();
+    
+    campoCostoBase.addActionListener(e -> campoDinamico1.requestFocus());
+    campoDinamico1.addActionListener(e -> campoDinamico2.requestFocus());
+    campoDinamico2.addActionListener(e -> botonAsignar.doClick());
 
     add(panelTitulo, java.awt.BorderLayout.NORTH);
     add(panelCentral, java.awt.BorderLayout.CENTER);

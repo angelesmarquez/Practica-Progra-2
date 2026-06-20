@@ -51,6 +51,12 @@ public class AdminRegistrarPersonal extends javax.swing.JDialog {
             }
         }
         });
+        
+        cajaNombre.addActionListener(e -> cajaTlf.requestFocus());
+        cajaTlf.addActionListener(e -> cajaID.requestFocus());
+        cajaID.addActionListener(e -> cajaUsuario.requestFocus());
+        cajaUsuario.addActionListener(e -> cajaContraseña.requestFocus());
+        cajaContraseña.addActionListener(e -> botonRegistrar.doClick());
     }
     
     private ControladorRegistrar controlador;

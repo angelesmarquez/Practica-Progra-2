@@ -25,6 +25,7 @@ public class ControladorClinico {
     public void abrirPacientes() {
         VentanaListaPacients ventana = new VentanaListaPacients((java.awt.Dialog) vista.getOwner(), true);
         cargarPacientes(ventana);
+        ventana.getBotonAlta().addActionListener(e -> darDeAlta(ventana));
         ventana.setVisible(true);
     }
     
@@ -91,11 +92,11 @@ public class ControladorClinico {
     }
     
     private void cargarPacientes(VentanaListaPacients ventana) {
-        javax.swing.table.DefaultTableModel modelo = ventana.getModeloTabla();
-        modelo.setRowCount(0);
-        for (Paciente p : gestor.obtenerPacientesPorMedico(idMedico)) {
-            String medico = p.getMedicoAsignado() != null ? p.getMedicoAsignado().getNombre() : "Sin médico";
-            modelo.addRow(new Object[]{p.getIdP(), p.getNombre(), p.getEstado(), medico});
+     javax.swing.table.DefaultTableModel modelo = ventana.getModeloTabla();
+     modelo.setRowCount(0);
+      for (Paciente p : gestor.obtenerPacientesPorMedico(idMedico)) {
+         String tratamiento = p.getListaTratamientos().isEmpty() ? "Terminado" : "En curso";
+          modelo.addRow(new Object[]{p.getIdP(), p.getNombre(), p.getEstado(), tratamiento});
         }
     }
     
@@ -106,7 +107,28 @@ public class ControladorClinico {
         }
     }
     
+    private void darDeAlta(VentanaListaPacients ventana) {
+     int fila = ventana.getTablaPacientes().getSelectedRow();
+     if (fila == -1) {
+         javax.swing.JOptionPane.showMessageDialog(ventana, "Seleccione un paciente primero.");
+         return;
+        }
+     String idPaciente = ventana.getModeloTabla().getValueAt(fila, 0).toString();
+     String tratamiento = ventana.getModeloTabla().getValueAt(fila, 3).toString();
     
-        
-        
-}
+     if (tratamiento.equals("En curso")) {
+         javax.swing.JOptionPane.showMessageDialog(ventana, "El paciente aún tiene tratamientos en curso.");
+         return;
+       }
+    
+     int confirmacion = javax.swing.JOptionPane.showConfirmDialog(ventana, 
+     "¿Dar de alta al paciente?", "Confirmar", javax.swing.JOptionPane.YES_NO_OPTION);
+    
+     if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
+        gestor.getvPacientes().remove(idPaciente);
+        gestor.GuardarDatos();
+        cargarPacientes(ventana);
+        javax.swing.JOptionPane.showMessageDialog(ventana, "Paciente dado de alta exitosamente.");
+    }
+   }
+ }
