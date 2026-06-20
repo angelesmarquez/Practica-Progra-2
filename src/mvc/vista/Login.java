@@ -7,17 +7,28 @@ public class Login extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Login.class.getName());
     //Nace el gestor
-    private GestorHospital gestor = new GestorHospital();
+    private GestorHospital gestor = GestorHospital.CargarDatos();
 
     public Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        
+        boolean existente = false;
+        for (mvc.modelo.AAPersona p : gestor.getvPersonal().values()) {
+            if (p.getUsuario().equals("admin")) {
+                existente = true;
+                break;
+            }
+        }
         // Administrador predeterminado del sistema
-        mvc.modelo.Administrativo adminDefault = new mvc.modelo.Administrativo(
-            "Administración", "A000", "Administrador", "0000000000", "admin", "admin123"
-        );
-        gestor.registrarPersonal(adminDefault);
+        if (!existente) {
+            mvc.modelo.Administrativo adminDefault = new mvc.modelo.Administrativo(
+                "Administración", "A000", "Administrador", "0000000000", "admin", "admin123"
+            );
+            gestor.registrarPersonal(adminDefault);
+            System.out.println("¡Usuario 'admin' por defecto creado con éxito para el primer ingreso!");
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -208,10 +219,6 @@ public class Login extends javax.swing.JDialog {
         javax.swing.JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.");
         return;
        }
-     if (personaEncontrada == null) {
-    javax.swing.JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.");
-    return;
-}
 
      // Verificar que el cargo coincida con el tipo de persona
      boolean cargoValido = false;

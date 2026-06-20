@@ -32,6 +32,6 @@ public class AMedicacion extends AATratamiento {
         return DosisDiaria * costoBase * DiasTratamiento;
     }
     public String obtenerDuracion() {
-        return DiasTratamiento + " dias de medicacion";
+        return DiasTratamiento + " dias";
     }
 }

@@ -70,6 +70,7 @@ public class ControladorRegistrar {
             
             if(nuevoPersonal != null){
                 gestor.registrarPersonal(nuevoPersonal);
+                gestor.GuardarDatos();
                 
                 //Preguntamos al usuario si desea registrar otro
                int respuesta = JOptionPane.showConfirmDialog(

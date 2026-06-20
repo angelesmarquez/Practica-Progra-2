@@ -77,6 +77,8 @@ public class ControladorClinico {
 
             gestor.getvTratamiento().put(idNuevo, tratamiento);
             gestor.asignarTratamiento(idPaciente, idNuevo);
+            gestor.GuardarDatos();
+            
             javax.swing.JOptionPane.showMessageDialog(ventana, "Tratamiento asignado correctamente.");
             ventana.dispose();
 

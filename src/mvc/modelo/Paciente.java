@@ -1,7 +1,8 @@
 package mvc.modelo;
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Paciente implements InterfaceAtendible {
+public class Paciente implements InterfaceAtendible,Serializable{
     
     //Variables propias de la clase Paciente
     private String idP;

@@ -1,4 +1,6 @@
 package mvc.modelo;
+
+
 public class Administrativo extends AAPersona {
     
     private String departamento;

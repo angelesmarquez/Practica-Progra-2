@@ -56,8 +56,8 @@ public class ControladorRegistrarPaciente {
         
         if(nuevoPaciente != null){
                 gestor.registrarPaciente(nuevoPaciente);
+                gestor.GuardarDatos();
                 
-                //Preguntamos al usuario si desea registrar otro
                int respuesta = JOptionPane.showConfirmDialog(
                vista,
                "¡"+nombre+" registrado con éxito!\n¿Desea registrar otro paciente?",
@@ -68,11 +68,9 @@ public class ControladorRegistrarPaciente {
                if (respuesta == JOptionPane.YES_OPTION){
                    vista.limpiarCampos();
                }else{
-                   //Ocultamos la vista
+                   
                    vista.setVisible(false);                  
-                   //Liberamos los reursos por completo, es decir, la memoria 
                    vista.dispose();                  
-                   System.out.println("Formulario de Registro Cerrado. Retornando al Menú Principal");
                    return;
                }             
             }

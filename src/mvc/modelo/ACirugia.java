@@ -32,6 +32,6 @@ public class ACirugia extends AATratamiento {
         return costoBase + CostoComplejidad;
     }
     public String obtenerDuracion() {
-        return "EJEMPLO, TIENE QUE RETORNAR UN TEXTO DE LA DURACION";
+        return " ";
     }
 }

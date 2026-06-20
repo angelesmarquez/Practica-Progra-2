@@ -1,10 +1,16 @@
 package mvc.modelo;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GestorHospital {
+public class GestorHospital implements Serializable{
     
     //Mapas
     private Map<String,AAPersona> vPersonal;
@@ -116,8 +122,60 @@ public class GestorHospital {
      System.out.println("Tratamiento asignado correctamente");
     }
     
+    //Metodo para Guardar los datos 
+    public void GuardarDatos(){
+        try{
+            FileOutputStream archivo = new FileOutputStream("HospitalUnet.dat");
+            ObjectOutputStream transformador = new ObjectOutputStream (archivo);
+            
+            transformador.writeObject(this);
+            
+            //Cerrar el flujo de datos
+            transformador.close();
+            archivo.close();
+            System.out.println("Se guardo el archivo .dat");
+            
+        }catch(java.io.IOException E){
+            System.out.println("Error al guardar");
+        }  
+    }
+    
+    //Metodo  para cargar los datos guardados
+    public static GestorHospital CargarDatos(){
+        try{
+            FileInputStream archivo = new FileInputStream ("HospitalUnet.dat");
+            ObjectInputStream transformador = new ObjectInputStream (archivo);
+            
+            GestorHospital gestorCargado = (GestorHospital) transformador.readObject();
+            
+            transformador.close();
+            archivo.close();
+            System.out.println("Datos cargados desde el archivo");
+            
+            return gestorCargado;
+        }catch(Exception e){
+            System.out.println("No se encontró archivo previo");
+            return new GestorHospital();
+        }
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //SE PUEDE DEJAR EL TEXTO GENERADO EN EL METODO EN LA INTERFAZ CON TEXT AREA 
-    public String generarFactura(String idPaciente) throws PacienteNoEncontradoException {
+    /*public String generarFactura(String idPaciente) throws PacienteNoEncontradoException {
     
      Paciente paciente = vPacientes.get(idPaciente);
       if (paciente == null) {
@@ -141,7 +199,8 @@ public class GestorHospital {
      factura += "===================";
     
      return factura;
-    }
+    }*/
+    
     
 }
 

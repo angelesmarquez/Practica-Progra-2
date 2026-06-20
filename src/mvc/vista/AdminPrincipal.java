@@ -1,8 +1,10 @@
 package mvc.vista;
 
+import mvc.controlador.ControladorFactura;
 import mvc.controlador.ControladorRegistrar;
 import mvc.controlador.ControladorRegistrarPaciente;
 import mvc.modelo.GestorHospital;
+
 
 public class AdminPrincipal extends javax.swing.JDialog {
     
@@ -33,7 +35,7 @@ public class AdminPrincipal extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         botonRegistratPersonal = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        boronFactura = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -99,13 +101,13 @@ public class AdminPrincipal extends javax.swing.JDialog {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(0, 0, 102));
-        jButton3.setFont(new java.awt.Font("Calisto MT", 1, 22)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 204, 255));
-        jButton3.setText("Generar Factura");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        boronFactura.setBackground(new java.awt.Color(0, 0, 102));
+        boronFactura.setFont(new java.awt.Font("Calisto MT", 1, 22)); // NOI18N
+        boronFactura.setForeground(new java.awt.Color(255, 204, 255));
+        boronFactura.setText("Generar Factura");
+        boronFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                boronFacturaActionPerformed(evt);
             }
         });
 
@@ -119,7 +121,7 @@ public class AdminPrincipal extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boronFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonRegistratPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(157, 157, 157))
@@ -133,7 +135,7 @@ public class AdminPrincipal extends javax.swing.JDialog {
                 .addGap(28, 28, 28)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(boronFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 51, Short.MAX_VALUE))
         );
 
@@ -166,9 +168,14 @@ public class AdminPrincipal extends javax.swing.JDialog {
         vistaRegistro.setVisible(true);
     }//GEN-LAST:event_botonRegistratPersonalActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void boronFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boronFacturaActionPerformed
+       GenerarFactura vistaFactura = new GenerarFactura(this, true);
+       ControladorFactura controladorFactura = new ControladorFactura(vistaFactura,this.gestor);
+       vistaFactura.conectControlador(controladorFactura);
+       vistaFactura.setVisible(true);
+               
+        
+    }//GEN-LAST:event_boronFacturaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,9 +216,9 @@ public class AdminPrincipal extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton boronFactura;
     private javax.swing.JButton botonRegistratPersonal;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

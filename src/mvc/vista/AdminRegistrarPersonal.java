@@ -295,7 +295,7 @@ public class AdminRegistrarPersonal extends javax.swing.JDialog {
         cajaContraseña.setBackground(new java.awt.Color(204, 255, 255));
         jPanel1.add(cajaContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 290, 142, 34));
 
-        cmbEspecialidad1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Meidicina General", "Odontología", "Fioterapia" }));
+        cmbEspecialidad1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Medicina General", "Odontología", "Fisioterapia" }));
         cmbEspecialidad1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbEspecialidad1ActionPerformed(evt);

@@ -1,6 +1,7 @@
 package mvc.modelo;
 
-public class AMedico extends AAPersona {
+
+public class AMedico extends AAPersona{
     private String especialidad;
     private String licMedica;
     

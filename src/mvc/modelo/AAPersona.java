@@ -1,6 +1,7 @@
 package mvc.modelo;
+import java.io.Serializable;
 
-public abstract class  AAPersona {
+public abstract class  AAPersona implements Serializable {
     //Dclaracion de Variables
     protected String ID;
     protected String nombre;

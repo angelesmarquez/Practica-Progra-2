@@ -1,6 +1,7 @@
 package mvc.modelo;
+import java.io.Serializable;
 
-public abstract class AATratamiento {
+public abstract class AATratamiento implements Serializable{
     //Variables
    protected int TDTratamiento;
    protected String nomTrat;
