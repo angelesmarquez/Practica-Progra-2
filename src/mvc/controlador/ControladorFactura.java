@@ -28,6 +28,7 @@ public class ControladorFactura {
     public void mostratDatos() {
         int i;
         String idPaciente= vista.getCajaID();
+        boolean encontrado = false;
         
         //Array para recorrer los pacientes
         java.util.ArrayList<Paciente> listaPacientes= new java.util.ArrayList<>(gestor.getvPacientes().values());
@@ -43,6 +44,7 @@ public class ControladorFactura {
                 //Nombre
                 String nombre = paciente.getNombre();
                 vista.setCajaNombre(nombre);  
+                encontrado=true;
                 
                 //Lista Tratamientos
                 String texto = "=====  Lista de Tratmientos  =====\n\n";
@@ -98,11 +100,11 @@ public class ControladorFactura {
                 vista.setTxtTotalPago(String.valueOf(paciente.getAbono()));
                 break;
                
-            }else{
-                JOptionPane.showMessageDialog(vista, "No se Encontro el Paciente en el Sistema", "Paciente no Encontrado", JOptionPane.ERROR_MESSAGE);
-            }   
-            
+            } 
         }
+        if(encontrado==false){
+                JOptionPane.showMessageDialog(vista, "No se Encontro el Paciente en el Sistema", "Paciente no Encontrado", JOptionPane.ERROR_MESSAGE);
+            } 
     }
 }
 

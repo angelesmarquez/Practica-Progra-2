@@ -1,5 +1,6 @@
 package mvc.vista;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import mvc.controlador.ControladorFactura;
@@ -11,10 +12,13 @@ public class GenerarFactura extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GenerarFactura.class.getName());
 
-    GestorHospital gestor;
-    public GenerarFactura(java.awt.Dialog parent, boolean modal) {
+    private GestorHospital gestor;
+   
+    public GenerarFactura(java.awt.Dialog parent, boolean modal,GestorHospital gestor) {
         super(parent, modal);
+        this.gestor=gestor;
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -43,6 +47,7 @@ public class GenerarFactura extends javax.swing.JDialog {
         txtTotalPago = new javax.swing.JTextField();
         botonVolver = new javax.swing.JButton();
         botonRegistrarpago = new javax.swing.JButton();
+        botonActualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -126,7 +131,7 @@ public class GenerarFactura extends javax.swing.JDialog {
             }
         });
 
-        botonRegistrarpago.setBackground(new java.awt.Color(0, 0, 102));
+        botonRegistrarpago.setBackground(new java.awt.Color(0, 153, 0));
         botonRegistrarpago.setFont(new java.awt.Font("Calisto MT", 1, 18)); // NOI18N
         botonRegistrarpago.setForeground(new java.awt.Color(255, 255, 255));
         botonRegistrarpago.setText("Registrar Pago");
@@ -136,13 +141,23 @@ public class GenerarFactura extends javax.swing.JDialog {
             }
         });
 
+        botonActualizar.setBackground(new java.awt.Color(0, 102, 102));
+        botonActualizar.setFont(new java.awt.Font("Calisto MT", 1, 12)); // NOI18N
+        botonActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        botonActualizar.setText("Actualizar Tasa de Cambio");
+        botonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonActualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+                .addContainerGap(95, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -159,6 +174,12 @@ public class GenerarFactura extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cajaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(txtCostoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,21 +188,17 @@ public class GenerarFactura extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(50, 50, 50)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(43, 43, 43)
-                                .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                                 .addComponent(botonRegistrarpago)
-                                .addGap(40, 40, 40))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cajaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(58, 58, 58))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(23, 23, 23))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(botonActualizar)
+                                .addGap(45, 45, 45))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,28 +218,32 @@ public class GenerarFactura extends javax.swing.JDialog {
                         .addGap(3, 3, 3)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cajaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel9)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtCostoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(17, 17, 17)
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtTotalPago, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtTotalPago, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 32, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(botonRegistrarpago, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 16, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(botonRegistrarpago, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(botonVolver)
+                                .addGap(12, 12, 12))))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -245,58 +266,53 @@ public class GenerarFactura extends javax.swing.JDialog {
     }//GEN-LAST:event_botonBuscarActionPerformed
 
     private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_botonVolverActionPerformed
 
     private void botonRegistrarpagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarpagoActionPerformed
+        String costoTexto = txtCostoTotal.getText().replace("Bs.", "").trim();
+        String pagoTexto = txtTotalPago.getText().replace("Bs.", "").trim();
+        float costoTotal=Float.parseFloat(costoTexto);
+        float totalPago= Float.parseFloat(pagoTexto);
+        if(totalPago>=costoTotal){
+            JOptionPane.showMessageDialog(this, "El Paciente ya Canceló el total de su Tratamiento");
+            return;
+        }
         Paciente pacienteActual= controladorFactura.getPacienteEncontrado();
-        VistaPago pago = new VistaPago(this,true);
-        ControladorPago controladorPago= new ControladorPago(pago,this.gestor,pacienteActual);
-        pago.conectControlador(controladorPago);
+        VistaPago pago = new VistaPago(this,true);      
+        if(controladorPago==null){
+            this.controladorPago = new ControladorPago(pago ,this.gestor, pacienteActual);
+        }else{
+            this.controladorPago.setVista(pago);
+            this.controladorPago.setPaciente(pacienteActual);
+        }
+        pago.datos(costoTotal, totalPago);
+        pago.conectControlador(this.controladorPago);
         pago.setVisible(true);
+        limpiarCampos();
     }//GEN-LAST:event_botonRegistrarpagoActionPerformed
+
+    
+    private void botonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarActionPerformed
+        if(controladorPago==null){
+           this.controladorPago = new ControladorPago(null ,this.gestor, null); 
+        }       
+        VistaTasa vistaT = new VistaTasa(this, true);
+        vistaT.conectControlador(this.controladorPago);
+        vistaT.setVisible(true);
+        
+    }//GEN-LAST:event_botonActualizarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                GenerarFactura dialog = new GenerarFactura(new javax.swing.JDialog(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
-
+    
      private ControladorFactura controladorFactura;
      public void conectControlador (ControladorFactura controlador){
          this.controladorFactura = controlador;
      }
+     
+     private ControladorPago controladorPago;
      
     //GyS
     public String getCajaID() {
@@ -320,8 +336,17 @@ public class GenerarFactura extends javax.swing.JDialog {
     }
     
     
+    public void limpiarCampos(){
+        //Limpiamos todos los campos de texto primero
+        cajaNombre.setText("");
+        cajaID.setText("");
+        txtTratamiento.setText("");
+        txtCostoTotal.setText("");
+        txtTotalPago.setText("");  
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonActualizar;
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonRegistrarpago;
     private javax.swing.JButton botonVolver;

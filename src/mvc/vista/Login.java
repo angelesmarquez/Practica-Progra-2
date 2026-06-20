@@ -27,7 +27,7 @@ public class Login extends javax.swing.JDialog {
                 "Administración", "A000", "Administrador", "0000000000", "admin", "admin123"
             );
             gestor.registrarPersonal(adminDefault);
-            System.out.println("¡Usuario 'admin' por defecto creado con éxito para el primer ingreso!");
+            System.out.println("Cargando programa desde 0");
         }
     }
     

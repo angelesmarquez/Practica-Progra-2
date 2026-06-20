@@ -1,7 +1,7 @@
 package mvc.modelo;
 import java.io.Serializable;
 
-public abstract class AATratamiento implements Serializable{
+public abstract class AATratamiento implements Serializable,InterfaceAuditable{
     //Variables
    protected int TDTratamiento;
    protected String nomTrat;
@@ -37,4 +37,22 @@ public abstract class AATratamiento implements Serializable{
     //Metodos Abtractos 
     public abstract float calcularcosto();
     public abstract String obtenerDuracion();
+    
+    //Interface Auditable
+    @Override
+    public Object[] datosTabla(String cargo, String especialidad) {
+        return null;
+    }
+    
+    @Override
+    public Object[] datosTratamiento (String nombrepaciente){
+        return new Object[] {
+            this.getNomTrat(),
+            nombrepaciente,          
+            this.calcularcosto(),
+            this.obtenerDuracion()
+        };
+    }
+    
+    
 }

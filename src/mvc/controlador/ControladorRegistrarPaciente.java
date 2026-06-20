@@ -1,5 +1,6 @@
 package mvc.controlador;
 
+import java.io.Serializable;
 import javax.swing.JOptionPane;
 import mvc.modelo.AAPersona;
 import mvc.modelo.AMedico;
@@ -7,7 +8,7 @@ import mvc.modelo.GestorHospital;
 import mvc.modelo.Paciente;
 import mvc.vista.AdminRegistrarPaciente;
 
-public class ControladorRegistrarPaciente {
+public class ControladorRegistrarPaciente implements Serializable {
     
     private AdminRegistrarPaciente vista;
     private GestorHospital gestor;

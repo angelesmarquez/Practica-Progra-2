@@ -3,19 +3,20 @@ package mvc.vista;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import mvc.controlador.ControladorPago;
+import mvc.modelo.GestorHospital;
 
 public class VistaPago extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaPago.class.getName());
-
+    
     /**
      * Creates new form VistaPago
      */
     public VistaPago(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -158,12 +159,27 @@ public class VistaPago extends javax.swing.JDialog {
         jLabel13.setText("Monto a Cancelar en Bs:");
 
         cajaMonto.setBackground(new java.awt.Color(204, 255, 255));
+        cajaMonto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cajaMontoActionPerformed(evt);
+            }
+        });
+        cajaMonto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cajaMontoKeyReleased(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Calisto MT", 2, 20)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 0, 102));
         jLabel14.setText("Método de Pago:");
 
         cmbMoneda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bs.", "USD", "COP" }));
+        cmbMoneda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbMonedaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -175,7 +191,7 @@ public class VistaPago extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(botonVolver1)
-                        .addGap(163, 163, 163)
+                        .addGap(148, 148, 148)
                         .addComponent(botonRegistrar)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -248,11 +264,11 @@ public class VistaPago extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_botonVolverActionPerformed
 
     private void botonRegistrarpagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarpagoActionPerformed
-        controlador.RegistrarPago();
+         
     }//GEN-LAST:event_botonRegistrarpagoActionPerformed
 
     private void botonVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolver1ActionPerformed
@@ -260,8 +276,25 @@ public class VistaPago extends javax.swing.JDialog {
     }//GEN-LAST:event_botonVolver1ActionPerformed
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
-        // TODO add your handling code here:
+        if(controlador.validarMonto(montoTotal, abono)== true){
+            return;
+        }else{
+            controlador.RegistrarPago();
+        }
+        
     }//GEN-LAST:event_botonRegistrarActionPerformed
+
+    private void cmbMonedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMonedaActionPerformed
+        controlador.CalcularTasa();
+    }//GEN-LAST:event_cmbMonedaActionPerformed
+
+    private void cajaMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaMontoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cajaMontoActionPerformed
+
+    private void cajaMontoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cajaMontoKeyReleased
+        controlador.CalcularTasa();
+    }//GEN-LAST:event_cajaMontoKeyReleased
 
     /**
      * @param args the command line arguments
@@ -300,7 +333,6 @@ public class VistaPago extends javax.swing.JDialog {
         });
     }
     private ControladorPago controlador;
-    
     public void conectControlador(ControladorPago controlador){
         this.controlador= controlador;
     }
@@ -317,6 +349,12 @@ public class VistaPago extends javax.swing.JDialog {
         this.cajaTotal.setText(texto);
     }
     
+    private float montoTotal;
+    private float abono;
+    public void datos(float montoTotal, float abono ){
+        this.montoTotal= montoTotal;
+        this.abono = abono;
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

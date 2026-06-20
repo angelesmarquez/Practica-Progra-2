@@ -1,7 +1,7 @@
 package mvc.modelo;
 import java.io.Serializable;
 
-public abstract class  AAPersona implements Serializable {
+public abstract class  AAPersona implements Serializable,InterfaceAuditable {
     //Dclaracion de Variables
     protected String ID;
     protected String nombre;
@@ -60,5 +60,20 @@ public abstract class  AAPersona implements Serializable {
     //Metodos Abtractos
     public abstract String realizarAccion();
     public abstract String generarReporte();
+    
+    @Override
+    public Object[] datosTabla(String cargo,String especialidad){
+        return new Object[]{
+            this.getID(),
+            this.getNombre(),
+            this.getTelf(),
+            cargo,
+            especialidad
+        };
+    }
+    @Override 
+    public Object[] datosTratamiento(String nombrepaciente) {
+        return null;
+    }
 
 }

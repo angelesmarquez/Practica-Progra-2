@@ -277,7 +277,7 @@ public class AdminRegistrarPersonal extends javax.swing.JDialog {
         });
         jPanel1.add(botonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 750, 240, 60));
 
-        cmbAreaEnf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Meidicina General", "Odontología", "Fioterapia" }));
+        cmbAreaEnf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Medicina General", "Odontología", "Fisioterapia" }));
         cmbAreaEnf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbAreaEnfActionPerformed(evt);
