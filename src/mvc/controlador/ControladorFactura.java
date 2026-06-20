@@ -13,13 +13,19 @@ import mvc.vista.GenerarFactura;
 public class ControladorFactura {
     GenerarFactura vista;
     GestorHospital gestor;
+    Paciente pacienteEncontrado;
 
     public ControladorFactura(GenerarFactura vista, GestorHospital gestor) {
         this.vista = vista;
         this.gestor = gestor;
     }
     
-    public void mostratDatos(){
+    //G
+    public Paciente getPacienteEncontrado(){
+        return pacienteEncontrado;    
+    }
+
+    public void mostratDatos() {
         int i;
         String idPaciente= vista.getCajaID();
         
@@ -29,24 +35,26 @@ public class ControladorFactura {
         for (i=0; i<listaPacientes.size(); i++) {
             
             Paciente paciente = listaPacientes.get(i);
-            
-            //Nombre
-            String nombre = paciente.getNombre();
-            vista.setCajaNombre(nombre);
-            
-            //Lista Tratmientos
+          
             if(paciente.getIdP().equalsIgnoreCase(idPaciente)){
-                       
+                
+                //Guardamos el apciente en el que esta para despues poderselo pasar al Controlador de Pago
+                this.pacienteEncontrado= paciente;
+                //Nombre
+                String nombre = paciente.getNombre();
+                vista.setCajaNombre(nombre);  
+                
+                //Lista Tratamientos
                 String texto = "=====  Lista de Tratmientos  =====\n\n";
                 //Array para recorrer la listade tratamientos de ese paciente
                 java.util.ArrayList<AATratamiento> listaTratamientos = paciente.getListaTratamientos();
                 
+                float CostoTotal=0;
                 //Ciclo para recorrer los tratmiento
                 for (int j=0;j<listaTratamientos.size();j++){
                     
                     AATratamiento tratencontrado = listaTratamientos.get(j);
                     String textoDuracion= "";
-                    float CostoTotal=0;
                     
                     //Condicionales para la factura para dias de terapia, medicacion o cirugía
                     if (tratencontrado instanceof ATerapia){
@@ -77,24 +85,24 @@ public class ControladorFactura {
                         ACirugia cirugia = (ACirugia) tratencontrado;
                         CostoTotal+= cirugia.calcularcosto();
                     }
-                   texto= texto + "-> " + tratencontrado.getNomTrat()+ textoDuracion+"\n";
-                
+                    texto= texto + "-> " + tratencontrado.getNomTrat()+ textoDuracion+"\n";
+                    
                     if(listaTratamientos.size()==0){
                         texto= "El Paciente no tiene tratamientos Asignados";
                     }
                     
-                    vista.setTxtTratamiento(texto);
-                    vista.setTxtCostoTotal(String.valueOf(CostoTotal));
+                    vista.setTxtTratamiento(texto);  
                     
-                }//Fin del Del For 
+                }//Fin del Del For Trtameiento
+                vista.setTxtCostoTotal(String.valueOf(CostoTotal+" Bs."));
+                vista.setTxtTotalPago(String.valueOf(paciente.getAbono()));
                 break;
-                
+               
             }else{
                 JOptionPane.showMessageDialog(vista, "No se Encontro el Paciente en el Sistema", "Paciente no Encontrado", JOptionPane.ERROR_MESSAGE);
-             }   
+            }   
             
         }
-        
     }
 }
 

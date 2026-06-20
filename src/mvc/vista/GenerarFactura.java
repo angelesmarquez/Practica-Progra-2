@@ -3,14 +3,15 @@ package mvc.vista;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import mvc.controlador.ControladorFactura;
+import mvc.controlador.ControladorPago;
+import mvc.modelo.GestorHospital;
+import mvc.modelo.Paciente;
 
 public class GenerarFactura extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GenerarFactura.class.getName());
 
-    /**
-     * Creates new form GenerarFactura
-     */
+    GestorHospital gestor;
     public GenerarFactura(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -76,6 +77,7 @@ public class GenerarFactura extends javax.swing.JDialog {
 
         cajaID.setBackground(new java.awt.Color(204, 255, 255));
 
+        txtTratamiento.setEditable(false);
         txtTratamiento.setBackground(new java.awt.Color(204, 255, 255));
         jScrollPane1.setViewportView(txtTratamiento);
 
@@ -97,18 +99,21 @@ public class GenerarFactura extends javax.swing.JDialog {
         jLabel8.setForeground(new java.awt.Color(0, 0, 102));
         jLabel8.setText("Nombre del Paciente:");
 
+        cajaNombre.setEditable(false);
         cajaNombre.setBackground(new java.awt.Color(204, 255, 255));
 
         jLabel9.setFont(new java.awt.Font("Calisto MT", 2, 20)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 102));
         jLabel9.setText("Costo Total del Tratmiento:");
 
+        txtCostoTotal.setEditable(false);
         txtCostoTotal.setBackground(new java.awt.Color(204, 255, 255));
 
         jLabel10.setFont(new java.awt.Font("Calisto MT", 2, 20)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 102));
         jLabel10.setText("Total Pago:");
 
+        txtTotalPago.setEditable(false);
         txtTotalPago.setBackground(new java.awt.Color(204, 255, 255));
 
         botonVolver.setBackground(new java.awt.Color(102, 0, 0));
@@ -136,14 +141,24 @@ public class GenerarFactura extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(54, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(cajaID, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(120, 120, 120))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
+                        .addComponent(botonBuscar)
+                        .addGap(293, 293, 293))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(txtCostoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,16 +182,6 @@ public class GenerarFactura extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cajaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cajaID, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(120, 120, 120))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(botonBuscar)
-                        .addGap(293, 293, 293))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,15 +192,16 @@ public class GenerarFactura extends javax.swing.JDialog {
                     .addComponent(cajaID, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
-                .addComponent(botonBuscar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addGap(20, 20, 20))
+                        .addComponent(botonBuscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(3, 3, 3)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cajaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
@@ -214,7 +220,9 @@ public class GenerarFactura extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
                                 .addComponent(botonRegistrarpago, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(28, Short.MAX_VALUE))))
+                        .addGap(0, 16, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -231,6 +239,7 @@ public class GenerarFactura extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         controladorFactura.mostratDatos();
     }//GEN-LAST:event_botonBuscarActionPerformed
@@ -240,7 +249,11 @@ public class GenerarFactura extends javax.swing.JDialog {
     }//GEN-LAST:event_botonVolverActionPerformed
 
     private void botonRegistrarpagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarpagoActionPerformed
-        // TODO add your handling code here:
+        Paciente pacienteActual= controladorFactura.getPacienteEncontrado();
+        VistaPago pago = new VistaPago(this,true);
+        ControladorPago controladorPago= new ControladorPago(pago,this.gestor,pacienteActual);
+        pago.conectControlador(controladorPago);
+        pago.setVisible(true);
     }//GEN-LAST:event_botonRegistrarpagoActionPerformed
 
     /**
@@ -301,6 +314,11 @@ public class GenerarFactura extends javax.swing.JDialog {
     public void setTxtCostoTotal(String texto) {
         txtCostoTotal.setText(texto);
     }
+
+    public void setTxtTotalPago(String texto) {
+        txtTotalPago.setText(texto);
+    }
+    
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

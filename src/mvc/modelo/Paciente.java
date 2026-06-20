@@ -2,7 +2,7 @@ package mvc.modelo;
 import java.util.ArrayList;
 import java.io.Serializable;
 
-public class Paciente implements InterfaceAtendible,Serializable{
+public class Paciente implements InterfaceAtendible,Serializable,InterfaceFacturable{
     
     //Variables propias de la clase Paciente
     private String idP;
@@ -12,9 +12,11 @@ public class Paciente implements InterfaceAtendible,Serializable{
     private String tlf;
     private ArrayList<AATratamiento> listaTratamientos;
     private AMedico MedicoAsignado;   
+    private float abono;
     
     //C
-    public Paciente(String idP, String nombre, String historial, String estado, String tlf, ArrayList<AATratamiento> listaTratamientos, AMedico MedicoAsignado) {
+
+    public Paciente(String idP, String nombre, String historial, String estado, String tlf, ArrayList<AATratamiento> listaTratamientos, AMedico MedicoAsignado, float abono) {
         this.idP = idP;
         this.nombre = nombre;
         this.historial = historial;
@@ -22,7 +24,9 @@ public class Paciente implements InterfaceAtendible,Serializable{
         this.tlf = tlf;
         this.listaTratamientos = listaTratamientos;
         this.MedicoAsignado = MedicoAsignado;
+        this.abono = 0.0f;
     }
+    
     
     //Segundo Constructor quye no tiene el array de tratamiento y un estado neutral en estado, par la paret administrativa
     public Paciente(String idP, String nombre, String tlf, AMedico MedicoAsignado) {
@@ -33,13 +37,22 @@ public class Paciente implements InterfaceAtendible,Serializable{
         
         this.listaTratamientos = new ArrayList<>(); 
         this.estado = "Ingresado";
+        this.abono= 0.0f;
     }
     
 
     //G&S
     public void agregarTratamiento(AATratamiento tratamiento) {
     this.listaTratamientos.add(tratamiento);
-}
+    }
+
+    public float getAbono() {
+        return abono;
+    }
+    public void setAbono(float abono) {
+        this.abono = abono;
+    }
+    
     public String getIdP() {
         return idP;
     }
@@ -89,4 +102,8 @@ public class Paciente implements InterfaceAtendible,Serializable{
         listaTratamientos.remove(tratamiento);
      }
     
+     @Override
+     public void RegistrarAbono(float monto){
+         this.abono= this.abono+monto;
+     }
 }
